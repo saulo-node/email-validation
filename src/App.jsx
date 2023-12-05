@@ -1,18 +1,23 @@
+const { useState } = require("react")
+
 const App = () => {
 
-    const tafkid = () => {
-        let pet = 'petting'
-        if (pet === 'petting') {
-            return true
-        } else {
-            return false
-        }
+    const [name, setName] = useState('')
+
+    const handleClick = () => {
+        console.log(name)
     }
 
+    const handleChange = (e) => {
+        setName(e.target.value)
+    }
     return (
         <>
-            <p>Pet:</p>
-            It was petted: {tafkid().toString()}
+            <p>Type name:</p>
+            <button onClick={handleClick}>Add</button>
+            <input type="text" onChange={handleChange} />
+            <br />
+            Name: {name}
         </>
     )
 }
