@@ -1,19 +1,12 @@
+import Condicional from "./components/Condicional"
+
 const App = () => {
 
-    const tafkid = () => {
-        let pet = 'petting'
-        if (pet === 'petting') {
-            return true
-        } else {
-            return false
-        }
-    }
-
     return (
-        <>
-            <p>Pet:</p>
-            It was petted: {tafkid().toString()}
-        </>
+        <div className="App">
+            <h1>Renderização Condicional</h1>
+            <Condicional />
+        </div>
     )
 }
 
