@@ -1,36 +1,40 @@
-import { useState } from "react"
+import { useState } from "react";
 
 const Condicional = () => {
-
-    const [email, setEmail] = useState()
-    const [userEmail, setUserEmail] = useState()
+    const [email, setEmail] = useState("");
+    const [isValidEmail, setIsValidEmail] = useState(true);
 
     const sendEmail = (e) => {
-        e.preventDefault()
-        setUserEmail(email)
-    }
+        const newEmail = e.target.value;
+        setEmail(newEmail);
 
-    const clearEmail = (e) => {
-        setUserEmail('')
-    }
+        // Validando o e-mail usando a propriedade validity
+        setIsValidEmail(e.target.validity.valid);
+    };
+
+    const handleClick = (e) => {
+        e.preventDefault();
+        if (isValidEmail) {
+            console.log("E-mail adicionado:", email);
+        } else {
+            console.log("Por favor, insira um e-mail válido.");
+        }
+    };
 
     return (
-        <div>
-            <h2>Register your email:</h2>
+        <>
             <form>
-                <input type="email" placeholder="Enter your email..." onChange={(e) => setEmail(e.target.value)}/>
-                <button type="submit" onClick={sendEmail}>Send email</button>
+                <button onClick={handleClick} disabled={!isValidEmail}>
+                    Add
+                </button>
+                <input type="email" onChange={sendEmail} />
                 <br />
-                {userEmail && (
-                    <div>
-                        <p>User email is: {userEmail}</p>
-                        <button onClick={clearEmail}>Clear email</button>
-                    </div>
-                )}
+                E-mail: {email}
+                <br />
+                Resultado: {isValidEmail ? "Tudo certo!" : "E-mail inválido."}
             </form>
-        </div>
-    )
-
-}
+        </>
+    );
+};
 
 export default Condicional;
